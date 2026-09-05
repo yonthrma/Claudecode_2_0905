@@ -98,6 +98,7 @@ description: GOAL → INTERVIEW(GRILL) → SPEC(SDD) → TDD 를 하나로 묶�
 ## 3. SPEC
 
 `sdd` 스킬을 따른다 → `docs/specs/<NNN>-<슬러그>/{spec.md, plan.md, tasks.md}`
+(spec.md 는 `spec` 스킬의 템플릿과 점검표를 쓴다.)
 
 1·2단계 산출물을 입력으로 쓴다:
 - 목표의 성공 기준(SC) → 명세의 기능 요구사항(FR)

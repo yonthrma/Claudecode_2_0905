@@ -30,6 +30,7 @@ Claude Code를 사용해 진행한 실습 결과물을 모아둡니다. 작업�
 | set-goal | `/set-goal <주제>` | 막연한 아이디어를 측정 가능한 목표로 |
 | interview | `/interview <주제>` | 한 번에 한 질문씩 요구사항 캐내기 |
 | interview (grill) | `/interview grill`, `grill me` | 계획을 5축으로 심문해 허점 찾기 |
+| spec | `/spec <기능>` · `/spec review <파일>` | 명세서 한 장 쓰기 / 기존 명세 점검 |
 | sdd | `/sdd <기능>` | 명세 우선 개발 (spec → plan → tasks → 구현) |
 | tdd | `/tdd <대상>` | RED → GREEN → REFACTOR 강제 |
 | dev-loop | `/dev-loop <슬러그>` | 위 넷을 게이트로 묶은 전체 파이프라인 |
@@ -45,6 +46,7 @@ Claudecode_2_0905/
     ├── README.md
     ├── set-goal/SKILL.md
     ├── interview/SKILL.md
+    ├── spec/SKILL.md
     ├── sdd/SKILL.md
     ├── tdd/SKILL.md
     └── dev-loop/SKILL.md
