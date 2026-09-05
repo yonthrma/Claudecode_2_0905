@@ -1,9 +1,9 @@
 ---
-name: goal
-description: 막연한 아이디어를 측정 가능한 목표로 바꾼다. 성공 기준·비목표·제약·완료 정의(DoD)를 문서로 남긴다. Use when the user types /goal, says 목표 정하자 / 뭘 만들지 정리 / 왜 하는지, or starts a project or feature without clear, measurable success criteria.
+name: set-goal
+description: 막연한 아이디어를 측정 가능한 목표로 바꾼다. 성공 기준·비목표·제약·완료 정의(DoD)를 문서로 남긴다. Use when the user types /set-goal, says 목표 정하자 / 뭘 만들지 정리 / 왜 하는지, or starts a project or feature without clear, measurable success criteria.
 ---
 
-# goal — 목표 확정 스킬
+# set-goal — 목표 확정 스킬
 
 대상: $ARGUMENTS
 

@@ -4,7 +4,7 @@
 
 | 스킬 | 부르는 법 | 하는 일 |
 | --- | --- | --- |
-| [goal](goal/SKILL.md) | `/goal <주제>` | 막연한 아이디어 → 측정 가능한 목표, 성공 기준, 비목표, DoD |
+| [set-goal](set-goal/SKILL.md) | `/set-goal <주제>` | 막연한 아이디어 → 측정 가능한 목표, 성공 기준, 비목표, DoD |
 | [interview](interview/SKILL.md) | `/interview <주제>` | 한 번에 한 질문씩 요구사항 캐내기 (discover 모드) |
 | [interview](interview/SKILL.md) | `/interview grill` · `grill me` | 계획을 5축으로 적대적 심문 — 허점 먼저 찾기 (grill 모드) |
 | [sdd](sdd/SKILL.md) | `/sdd <기능>` | 명세 우선 개발: spec.md → plan.md → tasks.md → 구현 |
@@ -14,7 +14,7 @@
 ## 어떤 걸 언제 쓰나
 
 ```
-뭘 만들지 모르겠다            → /goal
+뭘 만들지 모르겠다            → /set-goal
 만들 건 알겠는데 상세가 흐리다  → /interview
 계획은 섰는데 자신이 없다      → /interview grill
 무엇을 만들지 분명하다         → /sdd
@@ -51,7 +51,13 @@ macOS / Linux:
 cp -R ./.claude/skills/* ~/.claude/skills/
 ```
 
-복사 후 Claude Code 를 재시작하면 `/goal`, `/interview`, `/sdd`, `/tdd`, `/dev-loop` 를 어디서든 쓸 수 있다.
+복사 후 `/set-goal`, `/interview`, `/sdd`, `/tdd`, `/dev-loop` 를 어디서든 쓸 수 있다.
+(스킬은 폴더를 열 때 로드된다. 이미 그 폴더에서 세션이 열려 있었다면 새 세션을 시작한다.)
+
+## 이름 규칙 주의
+
+스킬 이름이 Claude Code 내장 명령어와 겹치면 **조용히 등록되지 않는다.**
+`goal` 이 그래서 `set-goal` 이 됐다. 새 스킬을 추가한 뒤에는 목록에 실제로 떴는지 확인할 것.
 
 ## 구조
 
@@ -60,7 +66,7 @@ cp -R ./.claude/skills/* ~/.claude/skills/
 
 ```
 .claude/skills/
-├── goal/SKILL.md
+├── set-goal/SKILL.md
 ├── interview/SKILL.md
 ├── sdd/SKILL.md
 ├── tdd/SKILL.md

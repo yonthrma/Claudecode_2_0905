@@ -59,7 +59,7 @@ description: GOAL → INTERVIEW(GRILL) → SPEC(SDD) → TDD 를 하나로 묶�
 
 ## 1. GOAL
 
-`goal` 스킬의 절차를 따른다 → `docs/goals/<날짜>-<슬러그>.md`
+`set-goal` 스킬의 절차를 따른다 → `docs/goals/<날짜>-<슬러그>.md`
 
 ### 🚧 게이트 A — 아래를 전부 만족해야 2단계로 간다
 - [ ] 목표가 한 문장이다
