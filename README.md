@@ -22,11 +22,15 @@ Claude Code를 사용해 진행한 실습 결과물을 모아둡니다. 작업�
 
 ## 개발 스킬 묶음
 
-`.claude/skills/` 에 프로젝트 진행용 스킬 5개가 들어 있습니다. 이 저장소 안에서는 바로 쓸 수 있고,
-다른 프로젝트로 복사하는 방법은 [.claude/skills/README.md](.claude/skills/README.md) 에 있습니다.
+`.claude/skills/` 에 프로젝트 진행용 스킬 10개, `.claude/agents/` 에 라우팅 에이전트 1개가 들어 있습니다.
+이 저장소 안에서는 바로 쓸 수 있고, 다른 프로젝트로 복사하는 방법은
+[.claude/skills/README.md](.claude/skills/README.md) 에 있습니다.
+
+**뭘 쓸지 모르겠으면 `/route` 하나만 기억하면 됩니다.** 나머지는 알아서 골라 씁니다.
 
 | 스킬 | 부르는 법 | 하는 일 |
 | --- | --- | --- |
+| **route** | `/route <요청>` | **어떤 스킬을 어떤 순서로 쓸지 알아서 판단해서 진행** |
 | set-goal | `/set-goal <주제>` | 막연한 아이디어를 측정 가능한 목표로 |
 | interview | `/interview <주제>` | 한 번에 한 질문씩 요구사항 캐내기 |
 | interview (grill) | `/interview grill`, `grill me` | 계획을 5축으로 심문해 허점 찾기 |
@@ -45,17 +49,21 @@ Claudecode_2_0905/
 ├── README.md          이 문서
 ├── .gitignore         업로드에서 제외할 파일 목록
 ├── .autosync          자동 동기화 대상 표시
-└── .claude/skills/    개발 스킬 묶음
-    ├── README.md
-    ├── set-goal/SKILL.md
-    ├── interview/SKILL.md
-    ├── spec/SKILL.md
-    ├── sdd/SKILL.md
-    ├── tdd/SKILL.md
-    ├── dev-loop/SKILL.md
-    ├── orient/SKILL.md
-    ├── adr/SKILL.md
-    └── handoff/SKILL.md
+└── .claude/
+    ├── agents/
+    │   └── dispatcher.md   스킬 조합을 판단하는 에이전트
+    └── skills/             개발 스킬 묶음
+        ├── README.md
+        ├── route/SKILL.md
+        ├── set-goal/SKILL.md
+        ├── interview/SKILL.md
+        ├── spec/SKILL.md
+        ├── sdd/SKILL.md
+        ├── tdd/SKILL.md
+        ├── dev-loop/SKILL.md
+        ├── orient/SKILL.md
+        ├── adr/SKILL.md
+        └── handoff/SKILL.md
 ```
 
 ## 참고

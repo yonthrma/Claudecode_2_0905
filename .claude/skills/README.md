@@ -2,6 +2,12 @@
 
 두 갈래다. **앞으로 만들 것**을 다루는 스킬과, **이미 있는 것**을 다루는 스킬.
 
+## 어느 걸 쓸지 모르겠으면
+
+| 스킬 | 부르는 법 | 하는 일 |
+| --- | --- | --- |
+| [route](route/SKILL.md) | `/route <요청>` | 알아서 판단해서 조합·실행. `dispatcher` 에이전트가 저장소를 조사하고 계획을 짜면, 승인받아 그대로 진행 |
+
 ## 앞으로 만들 것
 
 | 스킬 | 부르는 법 | 하는 일 |
@@ -41,7 +47,28 @@
 오늘 여기까지                 → /handoff
 어디까지 했더라               → /handoff resume
 버그가 났다                   → /debug  (Claude Code 내장, 이 묶음 아님)
+
+위 중 뭘 쓸지 모르겠다        → /route
 ```
+
+## dispatcher 에이전트
+
+`.claude/agents/dispatcher.md` — 요청을 받아 **어떤 스킬을 어떤 순서로 쓸지 판단**하는 서브에이전트.
+
+역할이 나뉘어 있다:
+
+| | dispatcher | 본 세션 |
+| --- | --- | --- |
+| 저장소 조사 · 계획 수립 | ⭕ | |
+| 사용자와 대화 | ❌ 불가 | ⭕ |
+| 파일 수정 | ❌ 안 함 | ⭕ |
+
+`interview` · `set-goal` · `grill` 은 사용자에게 묻고 답을 기다리는 스킬이라
+서브에이전트 안에서는 작동하지 않는다. 그래서 **판단만** 떼어 맡기고 실행은 본 세션이 한다.
+dispatcher 가 모르는 것은 질문하지 않고 `물어볼 것` 목록으로 돌려주며, 본 세션이 대신 묻는다.
+
+판단 기준의 핵심은 **요청 크기**다. XS(오타·한 줄)면 스킬을 하나도 쓰지 않는 게 정답이고,
+가장 흔한 실패는 작은 일에 파이프라인을 씌우는 것이다.
 
 `spec` 과 `sdd` 는 겹쳐 보이지만 범위가 다르다.
 `spec` 은 **명세 문서 한 장**에서 끝나고, `sdd` 는 **명세 → 계획 → 작업 → 구현** 전체를 게이트로 묶는다.
@@ -76,8 +103,17 @@ macOS / Linux:
 cp -R ./.claude/skills/* ~/.claude/skills/
 ```
 
-복사 후 `/set-goal`, `/interview`, `/spec`, `/sdd`, `/tdd`, `/dev-loop`, `/orient`, `/adr`, `/handoff` 를 어디서든 쓸 수 있다.
+복사 후 `/route`, `/set-goal`, `/interview`, `/spec`, `/sdd`, `/tdd`, `/dev-loop`, `/orient`, `/adr`, `/handoff` 를 어디서든 쓸 수 있다.
 (스킬은 폴더를 열 때 로드된다. 이미 그 폴더에서 세션이 열려 있었다면 새 세션을 시작한다.)
+
+`dispatcher` 에이전트도 함께 쓰려면 agents 폴더도 복사한다.
+
+```bash
+Copy-Item -Recurse -Force .\.claude\agents\* "$env:USERPROFILE\.claude\agents\"
+```
+
+에이전트는 스킬과 달리 **새 세션에서만 로드된다.** 복사 후 세션을 다시 시작할 것.
+`/route` 는 dispatcher 없이도 동작하지만, 그때는 판단을 본 세션이 직접 한다.
 
 ## 이름 규칙 주의
 
@@ -95,15 +131,25 @@ cp -R ./.claude/skills/* ~/.claude/skills/
 각 스킬은 `SKILL.md` 하나로 끝난다. YAML 프론트매터의 `description` 이 언제 이 스킬이 켜질지를 결정하므로,
 동작을 바꾸고 싶으면 본문을, 켜지는 조건을 바꾸고 싶으면 `description` 을 고친다.
 
+에이전트는 `.claude/agents/<이름>.md` 한 장이다. 프론트매터에 `name`, `description`,
+`tools`(쓸 수 있는 도구 제한), `model` 을 적는다. dispatcher 는 읽기 도구만 갖고 있어서
+구조적으로 파일을 못 고친다.
+
 ```
-.claude/skills/
-├── set-goal/SKILL.md     앞으로 만들 것
-├── interview/SKILL.md
-├── spec/SKILL.md
-├── sdd/SKILL.md
-├── tdd/SKILL.md
-├── dev-loop/SKILL.md
-├── orient/SKILL.md       이미 있는 것
-├── adr/SKILL.md
-└── handoff/SKILL.md
+.claude/
+├── agents/
+│   └── dispatcher.md     라우팅 판단 전담
+└── skills/
+    ├── route/SKILL.md        판단 + 실행 진입점
+    │
+    ├── set-goal/SKILL.md     ┐
+    ├── interview/SKILL.md    │
+    ├── spec/SKILL.md         ├ 앞으로 만들 것
+    ├── sdd/SKILL.md          │
+    ├── tdd/SKILL.md          │
+    ├── dev-loop/SKILL.md     ┘
+    │
+    ├── orient/SKILL.md       ┐
+    ├── adr/SKILL.md          ├ 이미 있는 것
+    └── handoff/SKILL.md      ┘
 ```
