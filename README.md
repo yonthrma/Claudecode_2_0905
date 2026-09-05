@@ -34,6 +34,9 @@ Claude Code를 사용해 진행한 실습 결과물을 모아둡니다. 작업�
 | sdd | `/sdd <기능>` | 명세 우선 개발 (spec → plan → tasks → 구현) |
 | tdd | `/tdd <대상>` | RED → GREEN → REFACTOR 강제 |
 | dev-loop | `/dev-loop <슬러그>` | 위 넷을 게이트로 묶은 전체 파이프라인 |
+| orient | `/orient [경로]` | 처음 보는 코드 20분 파악 (진입점·흐름·경계·위험) |
+| adr | `/adr <결정>` | 기술 결정 기록 (대안·대가·되돌리는 법) |
+| handoff | `/handoff` · `/handoff resume` | 중단하며 상태 넘기기 / 읽고 이어가기 |
 
 ## 폴더 구조
 
@@ -49,7 +52,10 @@ Claudecode_2_0905/
     ├── spec/SKILL.md
     ├── sdd/SKILL.md
     ├── tdd/SKILL.md
-    └── dev-loop/SKILL.md
+    ├── dev-loop/SKILL.md
+    ├── orient/SKILL.md
+    ├── adr/SKILL.md
+    └── handoff/SKILL.md
 ```
 
 ## 참고

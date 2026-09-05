@@ -1,6 +1,8 @@
 # Claude Code 개발 스킬 묶음
 
-아이디어를 통과하는 테스트까지 끌고 가는 스킬 5개.
+두 갈래다. **앞으로 만들 것**을 다루는 스킬과, **이미 있는 것**을 다루는 스킬.
+
+## 앞으로 만들 것
 
 | 스킬 | 부르는 법 | 하는 일 |
 | --- | --- | --- |
@@ -13,6 +15,15 @@
 | [tdd](tdd/SKILL.md) | `/tdd <대상>` | RED → GREEN → REFACTOR 강제 |
 | [dev-loop](dev-loop/SKILL.md) | `/dev-loop <슬러그>` | 위 넷을 게이트로 묶은 전체 파이프라인 |
 
+## 이미 있는 것
+
+| 스킬 | 부르는 법 | 하는 일 |
+| --- | --- | --- |
+| [orient](orient/SKILL.md) | `/orient [경로]` | 처음 보는 코드 20분 파악 — 진입점·흐름·경계·위험 지점 지도 |
+| [adr](adr/SKILL.md) | `/adr <결정>` | 기술 결정 하나를 기록 — 대안, 대가, 되돌리는 법까지 |
+| [handoff](handoff/SKILL.md) | `/handoff` | 중단하며 상태 넘기기 — 다음 할 일을 파일:줄 로 |
+| [handoff](handoff/SKILL.md) | `/handoff resume` | 최근 인수인계를 읽고 검증한 뒤 이어가기 |
+
 ## 어떤 걸 언제 쓰나
 
 ```
@@ -24,6 +35,12 @@
 무엇을 만들지 분명하다         → /sdd
 지금 이 함수를 짜야 한다       → /tdd
 처음부터 끝까지 제대로         → /dev-loop
+
+이 코드 뭐지                  → /orient
+왜 이렇게 했더라 (남길 때)     → /adr
+오늘 여기까지                 → /handoff
+어디까지 했더라               → /handoff resume
+버그가 났다                   → /debug  (Claude Code 내장, 이 묶음 아님)
 ```
 
 `spec` 과 `sdd` 는 겹쳐 보이지만 범위가 다르다.
@@ -59,7 +76,7 @@ macOS / Linux:
 cp -R ./.claude/skills/* ~/.claude/skills/
 ```
 
-복사 후 `/set-goal`, `/interview`, `/spec`, `/sdd`, `/tdd`, `/dev-loop` 를 어디서든 쓸 수 있다.
+복사 후 `/set-goal`, `/interview`, `/spec`, `/sdd`, `/tdd`, `/dev-loop`, `/orient`, `/adr`, `/handoff` 를 어디서든 쓸 수 있다.
 (스킬은 폴더를 열 때 로드된다. 이미 그 폴더에서 세션이 열려 있었다면 새 세션을 시작한다.)
 
 ## 이름 규칙 주의
@@ -68,6 +85,10 @@ cp -R ./.claude/skills/* ~/.claude/skills/
 `goal` 이 그래서 `set-goal` 이 됐다. 새 스킬을 추가한 뒤에는 목록에 실제로 떴는지 확인할 것.
 
 확인된 충돌: `goal`, `plan`, `tasks` — 전부 내장 명령어라 스킬 이름으로 못 쓴다.
+`debug` 는 이미 스킬이 존재하므로 만들지 않았다. `/debug` 를 그대로 쓴다.
+
+의도적으로 만들지 않은 것: 코드 리뷰(`/code-review`), 보안 점검(`/security-review`),
+리팩터링(`/simplify`), CLAUDE.md 생성(`/init`) — 전부 내장 기능이 이미 있다.
 
 ## 구조
 
@@ -76,10 +97,13 @@ cp -R ./.claude/skills/* ~/.claude/skills/
 
 ```
 .claude/skills/
-├── set-goal/SKILL.md
+├── set-goal/SKILL.md     앞으로 만들 것
 ├── interview/SKILL.md
 ├── spec/SKILL.md
 ├── sdd/SKILL.md
 ├── tdd/SKILL.md
-└── dev-loop/SKILL.md
+├── dev-loop/SKILL.md
+├── orient/SKILL.md       이미 있는 것
+├── adr/SKILL.md
+└── handoff/SKILL.md
 ```
